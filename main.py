@@ -8,21 +8,25 @@ def create_matrx():
     print("Какая матрица поступает на вход?\n(1)Пораждающая\n(2)Проверочная")
     question = input()
     if question == "Пораждающая" or question == "1":
+
         try:
             f = open('m.txt', 'r')
             matrix = [line.replace("\n", "").split() for line in f]
             #print(matrix) #Это по строкам матрица
             m = np.array(matrix)
-            print("Получена матрица:", m)
+            print("Получена матрица:\n", m)
             rows, culmns = m.shape
             speed = rows/culmns
             q = 2**rows
             print("---------------------------------\nk:", rows, "\nn:", culmns, "\nCкорость кода:", speed,"\nМощность алфавита:", q ,"\n---------------------------------\n")
             Gsys = np.eye(3, 3, dtype=int) #это создание единичн матрицы
-            print("Gsys:", Gsys)
+            print("Gsys:\n\n", Gsys)
             m_trancp = m.transpose()
+            print("Транспонированная матрица:\n\n", m_trancp)
+            inf_words = np.arange(0, 1)
         except:
             print("Error")
+
     elif question == "Проверочная" or question == "2":
         print("Я не готов к этому")
     else:
