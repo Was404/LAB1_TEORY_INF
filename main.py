@@ -1,8 +1,7 @@
 # This is a sample Python script.
 import numpy as np
-
+import math
 def create_matrx():
-    global matrix
     #try:
     f = open('m.txt', 'r')
     matrix = [line.replace("\n", "").split() for line in f]
@@ -15,7 +14,6 @@ def create_matrx():
     print("---------------------------------\nk:", rows, "\nn:", culmns, "\nCкорость кода:", speed,"\nМощность алфавита:", q ,"\n---------------------------------\n")
     
     if m[0,0] == 1 and m[1, 1] == 1 and m[2, 2] == 1:
-        print(m.dtype)
         p = np.array([[m[0,3], m[0,4], m[0,5], m[0,6]], [m[1,3], m[1,4], m[0,5], m[0,6]], [m[2,3], m[2,4], m[0,5], m[2,6]]], dtype=int)
         
     p_trancp = p.transpose()
@@ -26,17 +24,15 @@ def create_matrx():
     #inf_words = np.arange(0, 1)
     print("Систематический вид:\n", h_sys)
 
-    inf_words = np.indetity((rows, culmns))
+    # inf word = K log2N
+    inf_words = math.log(q) * culmns
     print(inf_words)
     #except Exception:
     #        print("Error")
-    #return matrix
+    
 
 
-def matrix_check(matrix):
-    with open('output.txt', 'w') as f:
-        for row in matrix:
-            f.write(' '.join(map(str, row)) + '\n')
+def matrix_check():
     f = open('m.txt', 'r')
     matrix = [line.replace("\n", "").split() for line in f]
     #print(matrix) #Это по строкам матрица
@@ -48,7 +44,16 @@ def matrix_check(matrix):
     print("---------------------------------\nk:", 
           rows, "\nn:", culmns, "\nCкорость кода:", speed,"\nМощность алфавита:", q ,
           "\n---------------------------------\n")
-      
+    
+    cod_word = 2**rows
+    nk = culmns - rows
+    if m[0,4] == 1 and m[1, 5] == 1 and m[2, 6] == 1:
+        I =  np.eye(nk, nk, dtype=int) 
+        p = np.array([[m[0,0], m[0,1], m[0,2], m[0,3]], [m[1,0], m[1,1], m[1,2], m[1,3]], [m[2,0], m[2,1], m[3,2], m[4,3]]], dtype=int)
+    H_sys = np.hstack((p, I))
+    p_trance = p.transpose()
+    print("Hsys:\n", H_sys)
+    print("P transpone:\n", p_trance)    
 
 def help():
      print("Python scrypt for matrix. How to use:\nCommands:\n", "-help"," "," "," "," "," ","Documentation\n")
@@ -68,9 +73,10 @@ if __name__ == '__main__':
     print("Какая матрица поступает на вход?\n(1)Пораждающая\n(2)Проверочная\n(Для справочной информации введите -help)")
     question = input()
     if question == "Пораждающая" or question == "1":
-        matrix_check()
+        create_matrx()
     elif question == "Проверочная" or question == "2":
         print("Я не готов к этому")
+        matrix_check()
     elif question == "-help":
          help()
     else:
