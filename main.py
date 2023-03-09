@@ -55,7 +55,7 @@ def create_matrx():
     h_sys = np.hstack((p_trancp, I))
     print("Систематический вид:\n", h_sys)
 
-    # inf word = K log2N
+    # inf words массив из (n,k)
     inf_words = np.array([[0,0,0], [0,0,1], [0,1,0], [0,1,1], [1,0,0], [1,0,1], [1,1,0], [1,1,1]])
     print("Информационные слова:\n", inf_words)
     for i in range(inf_words):
