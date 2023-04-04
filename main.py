@@ -61,7 +61,10 @@ def create_matrx():
     print("Информационные слова:\n", inf_words)
 
     cod_word_c = g_sys.dot(inf_words)
-    print("Кодовые слова:\n", cod_word_c)     
+    print("Кодовые слова:\n", cod_word_c) 
+
+    wtn = sum([line.size for line in cod_word_c])
+    print("WTN:\n", wtn)    
     #except Exception:
     #        print("Error")
     
@@ -102,7 +105,7 @@ def help():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print('######################################\nMatrix representation of block codes\n######################################\n')
-    print("Перед началом введите матрицу в файл m.txt или\nдобавьте свой txt файл в корень проекта с именем m\n---------------------------------")
+    print("Перед началом введите матрицу в файл m.txt или\nдобавьте свой txt файл в корень проекта с именем m\n--------------------------------")
 
     print("Какая матрица поступает на вход?\n(1)Пораждающая\n(2)Проверочная\n(Для справочной информации введите -help)")
     question = input()
