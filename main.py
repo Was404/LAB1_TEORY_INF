@@ -63,7 +63,7 @@ def create_matrx():
     cod_word_c = g_sys.dot(inf_words)
     print("Кодовые слова:\n", cod_word_c) 
 
-    wtn = sum([line.size for line in cod_word_c])
+    wtn = np.count_nonzero(cod_word_c)     #РАБОТАЕТ НЕ ТРОЖЪ 
     print("WTN:\n", wtn)    
     #except Exception:
     #        print("Error")
