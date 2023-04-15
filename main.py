@@ -61,15 +61,34 @@ def create_matrx():
     print("Информационные слова:\n", inf_words)
 
     cod_word_c = g_sys.dot(inf_words)
+    prod_vector = np.dot(inf_words, g_sys)
+    for j in range(len(prod_vector)):
+        if (prod_vector[j] % 2 == 0):
+            prod_vector[j] = 0
+        else:
+            prod_vector[j] = 1
+    
+    cod_word_c = prod_vector
     print("Кодовые слова:\n", cod_word_c) 
-
+    
+    code_words_or_syndromes = []
+    code_words_or_syndromes.append(cod_word_c)
     wtn = np.count_nonzero(cod_word_c)     #РАБОТАЕТ НЕ ТРОЖЪ 
-    print("WTN:\n", wtn)    
+    print("WTN:\n", wtn)
+    return wtn    
     #except Exception:
     #        print("Error")
     
 
-
+# получаем d минимальное
+def get_d_min(wtn):
+    # делаем копию, чтобы не менять исходную
+    wtn = list(wtn)
+    while 0 in wtn:
+        wtn.remove(0)
+    d_min = min(wtn)
+    return d_min
+    
 def matrix_check():
     f = open('m.txt', 'r')
     matrix = [line.replace("\n", "").split() for line in f]
